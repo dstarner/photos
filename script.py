@@ -3,12 +3,15 @@ from shutil import copy2
 
 from PIL import Image
 
+SKIP_FILES = ['.DS_Store']
+
 
 def get_list_of_files(location='raw'):
     file_paths = []
     for root, dirs, files in os.walk(location):
         for file in files:
-            file_paths.append(os.path.join(root, file))
+            if file not in SKIP_FILES:
+                file_paths.append(os.path.join(root, file))
     return file_paths
 
 
